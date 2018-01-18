@@ -12,7 +12,7 @@ class Users {
     public $loggedInMessage = 'Logged In';
     public $userCreatedMessage = 'User Created';
 
-    function loggedIn()
+    public function loggedIn()
     {
         $db = new \YourBB\Classes\Database;
         $randomString = $db->escape(session_id());
@@ -37,13 +37,13 @@ class Users {
         }
     }
 
-    function logOut() {
+    public function logOut() {
         session_regenerate_id(true);
         session_destroy();
         $_SESSION = array();
     }
 
-    function currentUserID()
+    public function currentUserID()
     {
         if ($this->loggedIn())
         {
@@ -64,7 +64,7 @@ class Users {
         }
     }
 
-    function currentUserName()
+    public function currentUserName()
     {
         if ($this->loggedIn())
         {
@@ -89,47 +89,58 @@ class Users {
         }
     }
 
-    function validateSession($f_userid, $f_sessionkey) {
+    public function validateSession($f_userid, $f_sessionkey) {
         $db = new \YourBB\Classes\Database;
         $sessionKey = $db->escape($f_sessionkey);
         $userID = intval($f_userid);
         $result = $db->query("SELECT * FROM `users` WHERE `id`='$userID' AND `session`='$sessionKey'");
-        if ($result->num_rows > 0) {
+        if ($result->num_rows > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
-    function generateToken() {
+    public function generateToken() {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
-        for ($i = 0; $i < 35; $i++) {
+        for ($i = 0; $i < 35; $i++)
+        {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
     }
 
-    function login($f_username, $f_password) {
+    public function login($f_username, $f_password) {
         $db = new \YourBB\Classes\Database;
         $username = $db->escape($f_username);
         $randomString = $db->escape(session_id());
         $result = $db->query("SELECT * FROM `users` WHERE UPPER(`username`)=UPPER('$username') OR UPPER(`email`)=UPPER('$username')");
-        if ($result->num_rows > 0) {
-            while ($row = mysqli_fetch_array($result)) {
-                if (password_verify($f_password,$row['password'])) {
+        if ($result->num_rows > 0)
+        {
+            while ($row = mysqli_fetch_array($result))
+            {
+                if (password_verify($f_password,$row['password']))
+                {
                     $db->query("UPDATE users SET `session`='$randomString' WHERE UPPER(`username`)=UPPER('$username')");
-                } else {
+                }
+                else
+                {
                     die(json_encode(["error" => $this->invalidLoginError]));
                 }
             }
-        } else {
+        }
+        else
+        {
             die(json_encode(["error" => $this->invalidLoginError]));
         }
     }
 
-    function register($f_username, $f_email, $f_password) {
+    public function register($f_username, $f_email, $f_password) {
         $db = new \YourBB\Classes\Database;
         $email = $db->escape($_POST['email']);
         $username = $db->escape($_POST['username']);
@@ -137,12 +148,14 @@ class Users {
         $result = $db->query("SELECT * FROM `users` WHERE `username`='$username' OR `email`='$email'");
         $timeNow = new DateTime();
         $timeNow = $timeNow->format("Y-m-d H:i:s");
-        if ( $result->num_rows > 0 ) {
+        if ( $result->num_rows > 0 )
+        {
             die(json_encode(["error" => $this->userExistsError]));
-        } else {
+        }
+        else
+        {
             $db->query("INSERT INTO users (username, email, password, regdate) VALUES ('$username', '$email', '$passwordHash', '$timeNow')");
             die(json_encode(["success" => $this->userCreatedMessage]));
         }
     }
 }
-?>

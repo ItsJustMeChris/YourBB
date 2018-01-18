@@ -40,4 +40,3 @@ class Database
         );') or die($mysqli->error);
     }
 }
-?>
