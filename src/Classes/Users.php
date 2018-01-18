@@ -38,14 +38,9 @@ class Users {
     }
 
     function logOut() {
-        if ($this->loggedIn()) {
-            session_regenerate_id(true);
-            session_destroy();
-            $_SESSION = array();
-            die(json_encode(["success" => $this->logoutMessage]));
-        } else {
-            die(json_encode(["error" => $this->notLoggedInError]));
-        }
+        session_regenerate_id(true);
+        session_destroy();
+        $_SESSION = array();
     }
 
     function currentUserID()
@@ -125,7 +120,6 @@ class Users {
             while ($row = mysqli_fetch_array($result)) {
                 if (password_verify($f_password,$row['password'])) {
                     $db->query("UPDATE users SET `session`='$randomString' WHERE UPPER(`username`)=UPPER('$username')");
-                    die(json_encode(["success" => $this->loggedInMessage]));
                 } else {
                     die(json_encode(["error" => $this->invalidLoginError]));
                 }

@@ -9,13 +9,17 @@ class AuthModel
         $users = new \YourBB\Classes\Users;
         if ($users->loggedIn())
         {
-            header('Location: /');
+            $this->data['username'] = $users->currentUserName();
+            $this->data['loggedin'] = $users->loggedIn();
+            $this->data['page'] = (TEMPLATES_PATH.'main.php');
+            $this->template = (TEMPLATES_PATH.'index.php');
         }
         else
         {
             $this->data['username'] = $users->currentUserName();
             $this->data['loggedin'] = $users->loggedIn();
-            $this->template = (TEMPLATES_PATH.'auth.php');
+            $this->data['page'] = (TEMPLATES_PATH.'auth.php');
+            $this->template = (TEMPLATES_PATH.'index.php');
         }
     }
 }

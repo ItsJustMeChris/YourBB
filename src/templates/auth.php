@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-
-    <meta charset="charset=utf-8">
-    <title>The Template name</title>
-</head>
-
-<body>
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/">Liquid Auth</a>
@@ -95,29 +80,11 @@
                     var data = $(this).serialize()
                     $.ajax({
                         type: 'POST',
-                        url: window.location.href + '/login',
+                        url: '/auth/login',
                         data: data,
-                        dataType: 'json',
-                        success: function(data) {
-                            if (data.error) {
-                                swal({
-                                    title: 'Error!',
-                                    text: data.error,
-                                    timer: 1200,
-                                    type: 'error',
-                                    showCancelButton: false,
-                                    showConfirmButton: false
-                                })
-                            } else {
-                                swal({
-                                    title: 'Logged In!',
-                                    text: data.success,
-                                    timer: 1200,
-                                    type: 'success',
-                                    showCancelButton: false,
-                                    showConfirmButton: false
-                                })
-                            }
+                        dataType: 'html',
+                        success: function (data) {
+                            $("html").html(data);
                         },
                         error: function(data) {
                             console.log(data)
@@ -135,29 +102,11 @@
                     var data = $(this).serialize()
                     $.ajax({
                         type: 'POST',
-                        url: window.location.href + '/register',
+                        url: '/auth/register',
                         data: data,
-                        dataType: 'json',
-                        success: function(data) {
-                            if (data.error) {
-                                swal({
-                                    title: 'Error!',
-                                    text: data.error,
-                                    timer: 1200,
-                                    type: 'error',
-                                    showCancelButton: false,
-                                    showConfirmButton: false
-                                })
-                            } else {
-                                swal({
-                                    title: 'Registered!',
-                                    text: data.success,
-                                    timer: 1200,
-                                    type: 'success',
-                                    showCancelButton: false,
-                                    showConfirmButton: false
-                                })
-                            }
+                        dataType : 'html',
+                        success: function (data) {
+                            $("html").html(data);
                         },
                         error: function(data) {
                             console.log(data)
@@ -169,6 +118,3 @@
             })
         </script>
     </div>
-</body>
-
-</html>

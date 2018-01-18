@@ -9,7 +9,7 @@ class AuthController
         $this->model = $model;
     }
 
-    function login()
+    public function login()
     {
         $users = new \YourBB\Classes\Users;
         if ($users->loggedIn()) {
@@ -25,13 +25,13 @@ class AuthController
         }
     }
 
-    function logout()
+    public function logout()
     {
         $users = new \YourBB\Classes\Users;
         $users->logOut();
     }
 
-    function register()
+    public function register()
     {
         $users = new \YourBB\Classes\Users;
         if (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password'])) {
