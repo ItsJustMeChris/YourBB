@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 require_once __DIR__ . '/bootstrap.php';
 define('TEMPLATES_PATH', 'src/templates/');
@@ -12,13 +15,12 @@ if ($params[0] == "")
 }
 $controllerName = '\YourBB\Controllers\\'.ucfirst($params[0]).'Controller';
 $modelName = '\YourBB\Models\\'.ucfirst($params[0]).'Model';
-$viewName = '\YourBB\Views\\'.ucfirst($params[0]).'View';
-if (!class_exists($controllerName) || !class_exists($modelName) || !class_exists($viewName)) {
+if (!class_exists($controllerName) || !class_exists($modelName)) {
     die("MVC Error!");
 }
 $model = new $modelName();
 $controller = new $controllerName($model);
-$view = new $viewName($controller, $model);
+$view = new \YourBB\Views\View($controller, $model);
 
 if (isset($params[1])) {
     $controller->{$params[1]}();

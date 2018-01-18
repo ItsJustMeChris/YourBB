@@ -1,7 +1,7 @@
 <?php
 namespace YourBB\Views;
 
-class IndexView
+class View
 {
     private $model;
     private $controller;
