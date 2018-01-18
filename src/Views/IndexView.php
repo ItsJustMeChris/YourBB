@@ -13,7 +13,7 @@ class IndexView
     }
 
     public function output(){
-        $data['username'] = $this->model->data['username'];
+        $data = $this->model->data;
         require_once($this->model->template);
     }
 }

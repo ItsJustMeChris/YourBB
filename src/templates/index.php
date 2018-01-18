@@ -29,9 +29,13 @@
                                 Welcome: <?php echo $data['username']; ?>
                             </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <?php if($data['loggedin']): ?>
                             <form id="logout_1" method="post">
                                 <input class="dropdown-item" type="submit" type="submit" name="logout" value="Logout" />
                             </form>
+                            <?php else: ?>
+                                <a class="dropdown-item" href="/auth">Login</a>
+                            <?php endif; ?>
                         </div>
                     </li>
                 </ul>
@@ -58,5 +62,47 @@
             </div>
         </div>
     </div>
+    <?php if($data['loggedin']): ?>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on('submit', '[id^=logout_]', function (e) {
+                e.preventDefault();
+                var data = $(this).serialize()
+                $.ajax({
+                  type: 'POST',
+                  url: window.location.href + '/auth/logout',
+                  data: data,
+                  dataType: 'json',
+                  success: function (data) {
+                    if (data.error) {
+                          swal({
+                              title: 'Error!',
+                              text: data.error,
+                              timer: 1200,
+                              type: 'error',
+                              showCancelButton: false,
+                              showConfirmButton: false
+                          })
+                    } else {
+                        swal({
+                            title: 'Logged In!',
+                            text: data.success,
+                            timer: 1200,
+                            type: 'success',
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        })
+                    }
+                  },
+                  error: function (data) {
+                      console.log(data)
+                    swal("ERR!", "Something blew up.", "error")
+                  }
+                })
+                return false
+            })
+        })
+    </script>
+    <?php endif; ?>
 </body>
 </html>
