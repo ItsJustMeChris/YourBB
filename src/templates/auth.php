@@ -84,6 +84,7 @@
                         data: data,
                         dataType: 'html',
                         success: function (data) {
+                            console.log(data)
                             $("html").html(data);
                         },
                         error: function(data) {
@@ -106,6 +107,7 @@
                         data: data,
                         dataType : 'html',
                         success: function (data) {
+                            console.log(data)
                             $("html").html(data);
                         },
                         error: function(data) {

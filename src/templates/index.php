@@ -10,6 +10,6 @@
         <title>YourBB</title>
     </head>
     <body>
-        <?php require_once($data['page']) ?>
+        <?php require_once __DIR__ . '/../routes.php'; ?>
     </body>
 </html>

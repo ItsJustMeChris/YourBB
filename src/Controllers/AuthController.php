@@ -23,6 +23,9 @@ class AuthController
                 die(json_encode(["error" => $users->invalidLoginError]));
             }
             $users->login($_POST['username'], $_POST['password']);
+            $this->model->data['template'] = (TEMPLATES_PATH.'main.php');
+            $this->model->data['username'] = $users->currentUserName();
+            $this->model->data['loggedin'] = $users->loggedIn();
         }
         else
         {
@@ -34,6 +37,9 @@ class AuthController
     {
         $users = new \YourBB\Classes\Users;
         $users->logOut();
+        $this->model->data['template'] = (TEMPLATES_PATH.'main.php');
+        $this->model->data['username'] = $users->currentUserName();
+        $this->model->data['loggedin'] = $users->loggedIn();
     }
 
     public function register()

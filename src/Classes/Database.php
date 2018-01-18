@@ -11,19 +11,19 @@ class Database
     private $pass = 'password';
     private $db = 'database';
 
-    function query($f_query)
+    public function query($f_query)
     {
         $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
         return $mysqli->query($f_query);
     }
 
-    function escape($f_string)
+    public function escape($f_string)
     {
         $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
         return $mysqli->escape_string($f_string);
     }
 
-    function setup()
+    public function setup()
     {
         $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
         $mysqli->query('

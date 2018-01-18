@@ -11,15 +11,13 @@ class AuthModel
         {
             $this->data['username'] = $users->currentUserName();
             $this->data['loggedin'] = $users->loggedIn();
-            $this->data['page'] = (TEMPLATES_PATH.'main.php');
-            $this->template = (TEMPLATES_PATH.'index.php');
+            $this->data['template'] = (TEMPLATES_PATH.'main.php');
         }
         else
         {
             $this->data['username'] = $users->currentUserName();
             $this->data['loggedin'] = $users->loggedIn();
-            $this->data['page'] = (TEMPLATES_PATH.'auth.php');
-            $this->template = (TEMPLATES_PATH.'index.php');
+            $this->data['template'] = (TEMPLATES_PATH.'auth.php');
         }
     }
 }

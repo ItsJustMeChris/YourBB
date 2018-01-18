@@ -13,7 +13,6 @@ class View
     }
 
     public function output(){
-        $data = $this->model->data;
-        require_once($this->model->template);
+        return $data = $this->model->data;
     }
 }
