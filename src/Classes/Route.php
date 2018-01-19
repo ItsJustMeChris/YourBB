@@ -58,4 +58,3 @@ class Route
         die("404");
     }
 }
-?>

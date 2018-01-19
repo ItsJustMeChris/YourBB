@@ -13,4 +13,3 @@ Classes\Route::check();
 //  Routher
 //    Controler/Action V
 //    ->View           <-Data
-?>

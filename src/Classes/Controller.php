@@ -1,5 +1,5 @@
 <?php
-namespace YourBB\Controllers;
+namespace YourBB\Classes;
 
 class Controller
 {

@@ -10,4 +10,3 @@ class View
         require_once(VIEWS_PATH.$viewName.'.php');
     }
 }
-?>

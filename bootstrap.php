@@ -17,4 +17,3 @@ function __autoload($class)
         require $file;
     }
 }
-?>
