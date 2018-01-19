@@ -6,28 +6,24 @@ class Database
     public static $loggedInError = 'Already Logged In';
     public static $invalidLoginError = 'Invalid Username or Password';
     public static $invalidFieldsError = 'Invalid Fields';
-    private static $host = 'localhost';
-    private static $user = 'WNQXNh7PpXM5phTQ';
-    private static $pass = 'PDMY7rNc5V223AFaT5TdGxKjApkssRVJXTDYtNTT4CyGKyBKp7';
-    private static $db = 'userauth';
 
     public static function query($f_query)
     {
-        $mysqli = mysqli_connect(self::$host, self::$user, self::$pass, self::$db);
+        $mysqli = mysqli_connect(YOURBBCONFIG['database']['host'], YOURBBCONFIG['database']['user'], YOURBBCONFIG['database']['pass'], YOURBBCONFIG['database']['db']);
         return $mysqli->query($f_query);
     }
 
     public static function escape($f_string)
     {
-        $mysqli = mysqli_connect(self::$host, self::$user, self::$pass, self::$db);
+        $mysqli = mysqli_connect(YOURBBCONFIG['database']['host'], YOURBBCONFIG['database']['user'], YOURBBCONFIG['database']['pass'], YOURBBCONFIG['database']['db']);
         return $mysqli->escape_string($f_string);
     }
 
     public static function setup()
     {
-        $mysqli = mysqli_connect(self::$host, self::$user, self::$pass, self::$db);
+        $mysqli = mysqli_connect(YOURBBCONFIG['database']['host'], YOURBBCONFIG['database']['user'], YOURBBCONFIG['database']['pass'], YOURBBCONFIG['database']['db']);
         $mysqli->query('
-        CREATE TABLE IF NOT EXISTS `'.self::$db.'`.`users`
+        CREATE TABLE IF NOT EXISTS `'.YOURBBCONFIG['database']['db'].'`.`users`
         (
             `id` INT NOT NULL AUTO_INCREMENT,
             `username` VARCHAR(50) NOT NULL,

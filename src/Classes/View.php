@@ -5,6 +5,7 @@ class View
 {
     public static $user = "YourBB\Controllers\AuthController";
     public static $controller;
+    //In view you can contact parent controller self::$controller::function();
 
     public static function CreateView($viewName)
     {

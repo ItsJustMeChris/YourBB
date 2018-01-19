@@ -8,12 +8,12 @@
         <link rel="stylesheet" href="/assets/stylesheets/main.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
         <meta charset="charset=utf-8">
-        <title>YourBB</title>
+        <title><?php echo YOURBBCONFIG['site']['name'];?></title>
     </head>
     <body>
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/">Liquid asdf</a>
+                <a class="navbar-brand" href="/"><?php echo YOURBBCONFIG['site']['name'];?></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
