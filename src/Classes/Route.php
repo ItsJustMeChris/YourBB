@@ -28,6 +28,10 @@ class Route
                     $controllerName = "YourBB\Controllers\\".ucwords(self::$params[0])."Controller";
                     $controllerName::hook(self::$params[1]);
                 }
+                else
+                {
+                    die("404");
+                }
             }
             $controller = $route;
             $function->__invoke();
