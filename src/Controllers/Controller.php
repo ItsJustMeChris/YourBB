@@ -3,8 +3,8 @@ namespace YourBB\Controllers;
 
 class Controller
 {
-    public static function CreateView($viewName)
+    public static function hook($action)
     {
-        require_once(VIEWS_PATH.$viewName.'.php');
+        static::$action();
     }
 }
