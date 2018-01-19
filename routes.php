@@ -11,6 +11,10 @@ Route::set('auth', 'auth','login/register/logout', function() {
     echo View::CreateView('auth');
 });
 
+Route::set('forum', 'forum','list/create/view', function() {
+    echo View::CreateView('forum');
+});
+
 Route::check();
 //  Routher
 //    Controler/Action V

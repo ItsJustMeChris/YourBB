@@ -8,3 +8,4 @@ define('VIEWS_PATH', __DIR__.'/src/Views/');
 define('YOURBBCONFIG', $config);
 require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/routes.php';
+YourBB\Classes\Database::setup();

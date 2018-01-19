@@ -34,5 +34,14 @@ class Database
             `active` BOOL NOT NULL DEFAULT 0,
         PRIMARY KEY (`id`)
         );') or die($mysqli->error);
+
+        $mysqli->query('
+        CREATE TABLE IF NOT EXISTS `'.YOURBBCONFIG['database']['db'].'`.`forums`
+        (
+            `id` INT NOT NULL AUTO_INCREMENT,
+            `name` VARCHAR(50) NOT NULL,
+            `description` VARCHAR(100) NOT NULL,
+        PRIMARY KEY (`id`)
+        );') or die($mysqli->error);
     }
 }
