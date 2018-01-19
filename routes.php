@@ -1,15 +1,17 @@
 <?php
 namespace YourBB;
+use YourBB\Classes\Route as Route;
+use YourBB\Classes\View as View;
 //Route::set('page1/page2', 'hook1/hook2', callback)
-Classes\Route::set('index', '/index','HelloWorld', function() {
-    Classes\View::CreateView('index');
+Route::set('index', '/index','HelloWorld', function() {
+    echo View::CreateView('index');
 });
 
-Classes\Route::set('test', 'test', '', function() {
-    Classes\View::CreateView('test');
+Route::set('auth', 'auth','login/register/logout', function() {
+    echo View::CreateView('auth');
 });
 
-Classes\Route::check();
+Route::check();
 //  Routher
 //    Controler/Action V
 //    ->View           <-Data

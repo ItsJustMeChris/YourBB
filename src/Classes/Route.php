@@ -1,6 +1,5 @@
 <?php
 namespace YourBB\Classes;
-
 use YourBB\Classes\View as view;
 
 class Route
@@ -19,13 +18,13 @@ class Route
         {
             self::$params[0] = 'index';
         }
+        $controllerName = "YourBB\Controllers\\".ucwords(self::$params[0])."Controller";
         if (strpos($route, self::$params[0]) !== false)
         {
             if (isset(self::$params[1]))
             {
                 if (in_array(self::$params[1], self::$validActions['b']))
                 {
-                    $controllerName = "YourBB\Controllers\\".ucwords(self::$params[0])."Controller";
                     $controllerName::hook(self::$params[1]);
                 }
                 else
@@ -33,7 +32,7 @@ class Route
                     die("404");
                 }
             }
-            $controller = $route;
+            view::controller($controllerName);
             $function->__invoke();
         }
     }
