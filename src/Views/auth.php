@@ -59,10 +59,27 @@
                             type: 'POST',
                             url: '/auth/login',
                             data: data,
-                            dataType: 'html',
+                            dataType: 'json',
                             success: function (data) {
-                                console.log(data)
-                                $("html").html(data);
+                              if (data.error) {
+                                    swal({
+                                        title: 'Error!',
+                                        text: data.error,
+                                        timer: 1200,
+                                        type: 'error',
+                                        showCancelButton: false,
+                                        showConfirmButton: false
+                                    })
+                              } else {
+                                  swal({
+                                      title: 'Logged In!',
+                                      text: data.success,
+                                      timer: 1200,
+                                      type: 'success',
+                                      showCancelButton: false,
+                                      showConfirmButton: false
+                                  })
+                              }
                             },
                             error: function(data) {
                                 console.log(data)
@@ -82,10 +99,27 @@
                             type: 'POST',
                             url: '/auth/register',
                             data: data,
-                            dataType : 'html',
+                            dataType : 'json',
                             success: function (data) {
-                                console.log(data)
-                                $("html").html(data);
+                              if (data.error) {
+                                    swal({
+                                        title: 'Error!',
+                                        text: data.error,
+                                        timer: 1200,
+                                        type: 'error',
+                                        showCancelButton: false,
+                                        showConfirmButton: false
+                                    })
+                              } else {
+                                  swal({
+                                      title: 'Logged In!',
+                                      text: data.success,
+                                      timer: 1200,
+                                      type: 'success',
+                                      showCancelButton: false,
+                                      showConfirmButton: false
+                                  })
+                              }
                             },
                             error: function(data) {
                                 console.log(data)

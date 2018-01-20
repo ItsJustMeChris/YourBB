@@ -25,7 +25,7 @@ class Route
             {
                 if (in_array(self::$params[1], self::$validActions['b']))
                 {
-                    $controllerName::hook(self::$params[1]);
+                    $controllerName::hook(self::$params[1], self::$params);
                 }
                 else
                 {

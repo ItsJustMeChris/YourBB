@@ -5,8 +5,8 @@ class Controller
 {
     public static $hooks = array();
 
-    public static function hook($action)
+    public static function hook($action, $params)
     {
-        static::$action();
+        static::$action($params);
     }
 }

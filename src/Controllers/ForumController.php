@@ -26,4 +26,22 @@ class ForumController extends Controller
             return $resultset;
         }
     }
+
+    public static function view($params)
+    {
+        if (!isset($params[2])) {
+            die("Forum doesn't exist");
+        }
+        $forumID = intval($params[2]);
+        $result = db::query("SELECT * FROM `forums` WHERE `id`='$forumID'");
+        if ($result->num_rows > 0)
+        {
+            while ($row = mysqli_fetch_array($result))
+            {
+                echo $row['id'];
+                $resultset[] = $row;
+            }
+            return $resultset;
+        }
+    }
 }

@@ -3,7 +3,7 @@ namespace YourBB\Classes;
 use YourBB\Controllers\AuthController as user;
 class View
 {
-    public static $user = "YourBB\Controllers\AuthController";
+    public static $user = "YourBB\Models\AuthModel";
     public static $controller;
     //In view you can contact parent controller self::$controller::function();
 

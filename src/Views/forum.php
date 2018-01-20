@@ -1,4 +1,3 @@
-<?php if (self::$user::loggedIn()) { header('Location: /'); }?>
             <div class="row">
                 <div class="col">
                     <div class="card mt-5 mb-5">
