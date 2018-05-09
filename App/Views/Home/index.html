@@ -1,9 +1,13 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block body %}
 
-{% block title %}Home{% endblock %}
+<h1>Welcome</h1>
 
-{% block body %}
 
-    <h1>Welcome</h1>
-
+<div class="card">
+    <ul class="list-group list-group-flush">
+        {% for row in categories %}
+        <li class="list-group-item">{{row.name}} - {{row.description}}</li> 
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

@@ -25,8 +25,6 @@ abstract class Model
         $valueString = implode(',', array_fill(0, count($params), '?'));
         $columnString = implode(", ", array_keys($params));
         $stmt = $db->prepare("INSERT INTO {$table} ({$columnString}) VALUES ({$valueString})");
-        echo "INSERT INTO {$table} ({$columnString}) VALUES ({$valueString})";
-        var_dump($params);
         $stmt->execute(array_values($params));
     }
 
@@ -43,9 +41,6 @@ abstract class Model
     protected static function query($query) 
     {
         $db = static::getDB();
-        foreach ($db->query($query) as $row) {
-            var_dump($row);
-            return $row;
-        }
+        return $db->query($query)->fetchAll();
     }
 }

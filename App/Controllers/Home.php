@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 use \Core\View;
 use \Core\Session;
-
+use App\Models\Category as CategoryModel;
 
 class Home extends \Core\Controller
 {
@@ -20,9 +20,10 @@ class Home extends \Core\Controller
 
     public function indexAction()
     {
-        echo Session::get('user');
+        $categories = CategoryModel::getAll();
         View::renderTemplate('Home/index.html', [
-            'session' => Session::get('user')
+            'session' => Session::get('user'),
+            'categories' => $categories
         ]);
     }
 }
