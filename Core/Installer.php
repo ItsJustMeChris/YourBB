@@ -29,7 +29,7 @@ class Installer {
              print("Created $table Table.\n");
         
         } catch(PDOException $e) {
-            echo $e->getMessage();//Remove or change message in production code
+            echo $e->getMessage();
         }
 
         $table = "forum_categories";
@@ -42,7 +42,7 @@ class Installer {
              print("Created $table Table.\n");
         
         } catch(PDOException $e) {
-            echo $e->getMessage();//Remove or change message in production code
+            echo $e->getMessage();
         }
 
         $table = "category_threads";
@@ -56,7 +56,7 @@ class Installer {
              print("Created $table Table.\n");
         
         } catch(PDOException $e) {
-            echo $e->getMessage();//Remove or change message in production code
+            echo $e->getMessage();
         }
 
         $table = "thread_comments";
@@ -68,7 +68,7 @@ class Installer {
              print("Created $table Table.\n");
         
         } catch(PDOException $e) {
-            echo $e->getMessage();//Remove or change message in production code
+            echo $e->getMessage();
         }
          
         

@@ -22,6 +22,10 @@ class Posts extends \Core\Controller
             
         ]);
     }
+
+    public function viewAction() {
+        var_dump($this->route_params);
+    }
     
     public function editAction()
     {

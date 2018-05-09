@@ -22,6 +22,7 @@ class Home extends \Core\Controller
     {
         echo Session::get('user');
         View::renderTemplate('Home/index.html', [
+            'session' => Session::get('user')
         ]);
     }
 }

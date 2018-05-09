@@ -26,7 +26,6 @@ class Router
     {
         foreach ($this->routes as $route => $params) {
             if (preg_match($route, $url, $matches)) {
-                // Get named capture group values
                 foreach ($matches as $key => $match) {
                     if (is_string($key)) {
                         $params[$key] = $match;
@@ -63,7 +62,6 @@ class Router
 
                 if (is_callable([$controller_object, $action])) {
                     $controller_object->$action();
-
                 } else {
                     throw new \Exception("Method $action (in controller $controller) not found");
                 }

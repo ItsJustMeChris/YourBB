@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}Posts{% endblock %} {% block body %}
+{% extends "base.html" %} {% block title %}User | Log In{% endblock %} {% block body %}
 
 <h1>Login</h1>
 
@@ -21,9 +21,7 @@
     $(function () {
 
         $('#loginForm').on('submit', function (e) {
-
             e.preventDefault();
-
             $.ajax({
                 type: 'post',
                 url: '',

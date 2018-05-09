@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.19.3/sweetalert2.min.css" />
@@ -16,7 +15,13 @@
     <div class="container">
         <nav class="nav">
             <a class="nav-link active" href="/">Home</a>
-            <a class="nav-link" href="/users/log-in">Login</a>
+            {% if session == "" %}
+            <a class="nav-link" href="/user/log-in">Login</a>
+            {% else %}
+            <form action="/user/log-out" method="POST" id="logoutForm">
+                <button type="submit" class="nav-link" style="background: none; border: none; color: #007bff; cursor: pointer;">Logout</button>
+            </form>
+            {% endif %}
         </nav>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
@@ -29,6 +34,36 @@
 
         {% block body %} {% endblock %}
     </div>
+
+    <script>
+        $(function () {
+            $('#logoutForm').on('submit', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'post',
+                    url: 'user/log-out',
+                    data: $('#logoutForm').serialize(),
+                    success: function (data) {
+                        const toast = swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+
+                        toast({
+                            type: data['type'],
+                            title: data['title'] + " - " + data['text']
+                        }).then((result) => {
+                            if (data['type'] == 'success') {
+                                window.location.replace("/");
+                            }
+                        })
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
