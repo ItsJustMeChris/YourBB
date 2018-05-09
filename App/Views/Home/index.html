@@ -2,12 +2,21 @@
 
 <h1>Welcome</h1>
 
+{{session}}
 
 <div class="card">
-    <ul class="list-group list-group-flush">
-        {% for row in categories %}
-        <li class="list-group-item">{{row.name}} - {{row.description}}</li> 
-        {% endfor %}
-    </ul>
+    <div class="card-body">
+        <h5 class="card-title">YourBB</h5>
+    </div>
+    {% for row in categories %}
+
+    <div class="card">
+
+        <div class="card-body">
+            <h5 class="card-title">{{row.name}}</h5>
+            <p class="card-text">{{row.description}}</p>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}

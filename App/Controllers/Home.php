@@ -22,7 +22,6 @@ class Home extends \Core\Controller
     {
         $categories = CategoryModel::getAll();
         View::renderTemplate('Home/index.html', [
-            'session' => Session::get('user'),
             'categories' => $categories
         ]);
     }

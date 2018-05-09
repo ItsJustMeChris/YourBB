@@ -1,6 +1,7 @@
 <?php
 
 namespace Core;
+use \Core\Session;
 
 class View
 {
@@ -19,6 +20,7 @@ class View
 
     public static function renderTemplate($template, $args = [])
     {
+        $args['session'] = Session::get('user');
         static $twig = null;
 
         if ($twig === null) {

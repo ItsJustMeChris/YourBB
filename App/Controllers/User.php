@@ -42,6 +42,17 @@ class User extends \Core\Controller
         }
     }
 
+    public function viewAction() {
+        $userData = UserModel::getUser($this->route_params['id']);
+        if ($userData) {
+            View::renderTemplate('User/user.html', [
+                'userInfo' => $userData[0]
+            ]); 
+        } else {
+            echo '??';
+        }
+    }
+
     public function logOutAction()
     {
         if (Session::get('user')) {

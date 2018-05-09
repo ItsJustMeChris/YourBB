@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block title %}User | Register{% endblock %} {% block body %}
+
+<h1>Viewing {{userInfo.username|upper}}</h1>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{userInfo.username}} </h5>
+        <h6 class="card-subtitle mb-2 text-muted">ID: {{userInfo.ID}} - GROUP: {{userInfo.user_group}}</h6>
+        <p class="card-text">//User Bio.</p>
+    </div>
+</div>
+
+{% endblock %}
