@@ -9,7 +9,6 @@ class User extends \Core\Model
 {
     public static function login($username, $password) 
     {
-        //        $arr = static::select('user', 'username=? AND password=?', ['Joe', '$2y$10$d2BxUUNCV38YHhEowAef0em6fqTtA6iymhR4dLVyTmcW0P6hjhIB6']);
         if (isset($_POST['username']) && isset($_POST['password'])) {
             $arr = static::select('users', 'username=?', [strtoupper($username)]);
             if ($arr) {
@@ -22,12 +21,20 @@ class User extends \Core\Model
         return false;
     }
 
+    public static function getUserFromKey($key) {
+        if (isset($_POST['username']) && isset($_POST['password'])) {
+            $arr = static::select('users', 'user_key=?', [$key]);
+            if ($arr) {
+                return $arr;
+            }
+        }
+        return false;
+    }
+
     public static function getUser($username) 
     {
-        //        $arr = static::select('user', 'username=? AND password=?', ['Joe', '$2y$10$d2BxUUNCV38YHhEowAef0em6fqTtA6iymhR4dLVyTmcW0P6hjhIB6']);
         $arr = static::select('users', 'username=?', [strtoupper($username)]);
         if ($arr) {
-            Session::put('user', $arr[0]['user_key']);
             return $arr;
         }
         return false;

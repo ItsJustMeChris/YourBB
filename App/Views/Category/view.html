@@ -1,0 +1,79 @@
+{% extends "base.html" %} {% block title %}Category | {{categoryInfo.name}}{% endblock %} {% block body %}
+
+<h1>Viewing {{userInfo.username|upper}}</h1>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{categoryInfo.name}} </h5>
+        <h6 class="card-subtitle mb-2 text-muted">ID: {{categoryInfo.ID}} - GROUP: {{categoryInfo.description}}</h6>
+        <p class="card-text">//User Bio.</p>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Threads</h5>
+    </div>
+    {% for thread in threads %}
+    
+    <div class="card">
+
+        <div class="card-body">
+            <h5 class="card-title">{{thread.title}}</h5>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h1>New Post</h1>
+
+<form action="" method="POST" id="newThreadForm">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Username</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username" name="post_title">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" name="post_content">
+    </div>
+    <input type="hidden" name="user_key" value="1">
+    <input type="hidden" name="categoryid" value="{{categoryInfo.ID}}">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<script>
+    $(function () {
+
+        $('#newThreadForm').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: '/thread/add-new',
+                data: $('#newThreadForm').serialize(),
+                success: function (data) {
+                    if (data['type'] == 'success') {
+                        swal({
+                            type: data['type'],
+                            title: data['title'],
+                            text: data['text'],
+                            timer: 5000,
+                            onOpen: () => {
+                                swal.showLoading()
+                            }
+                        }).then((result) => {
+                            window.location.replace("/");
+                        })
+                    } else {
+                        swal({
+                            type: data['type'],
+                            title: data['title'],
+                            text: data['text'],
+                            footer: '<a href="/register">Need to register?</a>',
+                        })
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

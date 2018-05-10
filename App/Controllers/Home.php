@@ -4,6 +4,7 @@ namespace App\Controllers;
 use \Core\View;
 use \Core\Session;
 use App\Models\Category as CategoryModel;
+use App\Models\Forum as ForumModel;
 
 class Home extends \Core\Controller
 {
@@ -21,8 +22,16 @@ class Home extends \Core\Controller
     public function indexAction()
     {
         $categories = CategoryModel::getAll();
+        
+        $forums = [];
+
+        foreach($categories as $cat) {
+            $forums[$cat['ID']] = ForumModel::getForumsForCategory($cat['ID']);;
+        }
+        
         View::renderTemplate('Home/index.html', [
-            'categories' => $categories
+            'categories' => $categories,
+            'forums' => $forums
         ]);
     }
 }

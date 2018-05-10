@@ -45,12 +45,31 @@ class Installer {
             echo $e->getMessage();
         }
 
-        $table = "category_threads";
+        $table = "category_forums";
         try {
              $sql ="CREATE table $table(
-             ID INT( 11 ) PRIMARY KEY,
+             ID INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
+             forum_id INT( 11 ) NOT NULL,
              title VARCHAR( 50 ) NOT NULL, 
-             locked BIT( 1 ) NOT NULL, 
+             locked TINYINT( 1 ) NOT NULL, 
+             content TEXT( 500 ) NOT NULL);" ;
+             $db->exec($sql);
+             print("Created $table Table.\n");
+        
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        $table = "forum_threads";
+        try {
+             $sql ="CREATE table $table(
+             ID INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
+             thread_id INT( 11 ) NOT NULL,
+             creator_id INT( 11 ) NOT NULL,
+             post_time DATETIME NOT NULL,
+             last_edit_time DATETIME NOT NULL,
+             title VARCHAR( 50 ) NOT NULL, 
+             locked TINYINT( 1 ) NOT NULL, 
              content TEXT( 500 ) NOT NULL);" ;
              $db->exec($sql);
              print("Created $table Table.\n");
@@ -62,7 +81,11 @@ class Installer {
         $table = "thread_comments";
         try {
              $sql ="CREATE table $table(
-             ID INT( 11 ) PRIMARY KEY,
+             ID INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
+             comment_id INT( 11 ) NOT NULL,
+             poster_id INT( 11 ) NOT NULL,
+             post_time DATETIME NOT NULL,
+             last_edit_time DATETIME NOT NULL,
              content TEXT( 500 ) NOT NULL);" ;
              $db->exec($sql);
              print("Created $table Table.\n");

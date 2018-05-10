@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block title %}Admin | Create Category{% endblock %} {% block body %}
+
+<h1>Create Forum</h1>
+
+
+<form action="" method="POST" id="createForumForm">
+    <div class="form-group">
+        <label for="categoryName">Name</label>
+        <input type="text" class="form-control" id="categoryName" aria-describedby="categoryName" placeholder="Name" name="title">
+        <small id="categoryName" class="form-text text-muted">The name of your category.</small>
+    </div>
+    <div class="form-group">
+        <label for="categoryDescription">Description</label>
+        <input type="text" class="form-control" id="categoryDescription" placeholder="Description" name="content">
+        <small id="categoryDescription" class="form-text text-muted">The category description is displayed on the forum index by default.</small>
+    </div>
+    <input type="hidden" name="category_id" value="2">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<script>
+    $(function () {
+
+        $('#createForumForm').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: '',
+                data: $('#createForumForm').serialize(),
+                success: function (data) {
+                    const toast = swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+
+                    toast({
+                        type: data['type'],
+                        title: data['title'] + " - " + data['text']
+                    })
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
