@@ -10,11 +10,10 @@ class User extends \Core\Model
     public static function login($username, $password) 
     {
         if (isset($_POST['username']) && isset($_POST['password'])) {
-            $arr = static::select('users', 'username=?', [strtoupper($username)]);
+            $arr = static::select('users', 'UPPER(username)=?', [strtoupper($username)]);
             if ($arr) {
                 if (password_verify($password, $arr[0]['password'])) {
-                    Session::put('user', $arr[0]['user_key']);
-                    return true;
+                    return $arr;
                 }
             }
         }
@@ -22,11 +21,9 @@ class User extends \Core\Model
     }
 
     public static function getUserFromKey($key) {
-        if (isset($_POST['username']) && isset($_POST['password'])) {
-            $arr = static::select('users', 'user_key=?', [$key]);
-            if ($arr) {
-                return $arr;
-            }
+        $arr = static::select('users', 'user_key=?', [$key]);
+        if ($arr) {
+            return $arr;
         }
         return false;
     }
@@ -53,7 +50,7 @@ class User extends \Core\Model
             
             $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $test = array(
-                'username' => strtoupper($_POST['username']), 
+                'username' => $_POST['username'], 
                 'password' => $passwordHashed,
                 'reg_ip' => $ip,
                 'cur_ip' => $ip,

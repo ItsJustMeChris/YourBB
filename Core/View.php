@@ -21,6 +21,7 @@ class View
     public static function renderTemplate($template, $args = [])
     {
         $args['session'] = Session::get('user');
+        $args['user'] = (Session::get('username') != '' ? Session::get('username') : 'Guest');
         static $twig = null;
 
         if ($twig === null) {

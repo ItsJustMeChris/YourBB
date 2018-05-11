@@ -1,0 +1,50 @@
+body {
+    background-color: #e8e8e8;
+}
+
+.card.categoryCard {
+    background: #477bb8;
+    border: none;
+    border-radius: 0;
+    color: #fff;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.card.forumCard {
+    border: none;
+    border-radius: 0;
+    background: #fafafa;
+}
+
+a {
+    color: #3c699c;
+    text-decoration: none !important;
+}
+
+ol.breadcrumb {
+    border-radius: 0;
+}
+
+.card.seperator-01 {
+    background: #F5F5F5;
+    border-radius: 0;
+    border: none;
+}
+
+.card.seperator-0 {
+    border-radius: 0;
+    border: none;
+    background: #F0F0F0;
+}
+
+.card.threadReply {
+    background: #f3f3f3;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 1rem;
+}
+
+.card.initial.threadReply {
+    background: #fafafa;
+}

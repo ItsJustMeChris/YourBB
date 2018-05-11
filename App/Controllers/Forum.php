@@ -18,12 +18,12 @@ class Forum extends \Core\Controller
     }
 
     public function viewAction() {
-        $categoryData = ForumModel::getCategory($this->route_params['id']);
-        if ($categoryData) {
-            $categoryThreads = ForumModel::getCategoryThreads($categoryData[0]['ID']);
-            View::renderTemplate('Category/view.html', [
+        $forumData = ForumModel::getForumByID($this->route_params['id']);
+        if ($forumData) {
+            $forumThreads = ForumModel::getForumThreads($forumData[0]['ID']);
+            View::renderTemplate('Forum/view.html', [
                 'forumInfo' => $forumData[0],
-                'threads' => $categoryThreads
+                'threads' => $forumThreads
             ]); 
         } else {
             echo '??';

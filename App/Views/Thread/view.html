@@ -1,0 +1,82 @@
+{% extends "base.html" %} {% block title %}Thread | {{threadInfo.title}}{% endblock %} {% block body %}
+
+<nav aria-label="breadcrumb" style="margin-top: 1rem;">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/">Board Index</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="/">Category</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="/">Forum</a>
+        </li>
+        <li class="breadcrumb-item active">
+            <a href="/">{{threadInfo.title}}</a>
+        </li>
+    </ol>
+</nav>
+
+<div class="card initial threadReply">
+    <div class="card-body">
+        <h5 class="card-title">{{threadInfo.title}}</h5>
+        <p class="card-text">{{threadInfo.content}}</p>
+    </div>
+</div>
+
+{% for post in posts %}
+
+<div class="card threadReply">
+    <div class="card-body">
+        <p class="card-text">{{post.content}}</p>
+    </div>
+</div>
+
+{% endfor %}
+
+<h1>Comment</h1>
+
+<form action="" method="POST" id="newPostForm">
+    <div class="form-group">
+        <label for="commentContent">Username</label>
+        <input type="text" class="form-control" id="commentContent" placeholder="Oh snap, let me comment on that" name="post_content">
+        <small id="commentHelp" class="form-text text-muted">What you thinkin yo?</small>
+    </div>
+    <input type="hidden" name="thread_id" value="{{threadInfo.ID}}">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<script>
+    $(function () {
+
+        $('#newPostForm').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: '/post/add-new',
+                data: $('#newPostForm').serialize(),
+                success: function (data) {
+                    if (data['type'] == 'success') {
+                        swal({
+                            type: data['type'],
+                            title: data['title'],
+                            text: data['text'],
+                            timer: 5000,
+                            onOpen: () => {
+                                swal.showLoading()
+                            }
+                        })
+                    } else {
+                        swal({
+                            type: data['type'],
+                            title: data['title'],
+                            text: data['text'],
+                            footer: '<a href="/register">Need to register?</a>',
+                        })
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

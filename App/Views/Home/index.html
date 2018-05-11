@@ -1,22 +1,27 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block body %}
 
-<h1>Welcome</h1>
+<nav aria-label="breadcrumb" style="margin-top: 1rem;">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active">
+            <a href="/">Board Index</a>
+        </li>
+    </ol>
+</nav>
 
-{{session}} 
 {% for row in categories %}
-<div class="card">
+<div class="card categoryCard">
     <div class="card-body">
         <h5 class="card-title">{{row.name}}</h5>
         <p class="card-text">{{row.description}}</p>
     </div>
     {% for forum in forums[row.ID] %}
-    <div class="card">
+    <div class="card forumCard">
         <div class="card-body">
-            <h5 class="card-title">{{forum.title}}</h5>
-            <p class="card-text">{{forum.description}}</p>
+            <h5 class="card-title">
+                <a href="/forum/{{forum.ID}}/view">{{forum.title}}</a>
+            </h5>
         </div>
     </div>
     {% endfor %}
 </div>
-{% endfor %} 
-{% endblock %}
+{% endfor %} {% endblock %}

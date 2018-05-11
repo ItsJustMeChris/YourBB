@@ -1,0 +1,79 @@
+{% extends "base.html" %} {% block title %}Forum | {{forumInfo.title}}{% endblock %} {% block body %}
+<nav aria-label="breadcrumb" style="margin-top: 1rem;">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/">Board Index</a>
+        </li>
+        <li class="breadcrumb-item active">
+                <a href="/">{{forumInfo.title}}</a>
+        </li>
+    </ol>
+</nav>
+
+<div class="card categoryCard">
+    <div class="card-body">
+        <h5 class="card-title">Threads</h5>
+    </div>
+    {% for thread in threads %}
+
+    <div class="card seperator-0{% if loop.index0 % 2 == 0 %}1{% endif %}">
+
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="/thread/{{thread.ID}}/view">{{thread.title}}</a>
+            </h5>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h1>New Thread</h1>
+
+<form action="" method="POST" id="newThreadForm">
+    <div class="form-group">
+        <label for="threadTitle">Thread Title</label>
+        <input type="text" class="form-control" id="threadTitle" placeholder="A snazzy title" name="thread_title">
+        <small id="threadTitle" class="form-text text-muted">Name it something awesome!</small>
+    </div>
+    <div class="form-group">
+        <label for="threadContent">Thread Content</label>
+        <input type="text" class="form-control" id="threadContent" placeholder="Something awesome" name="thread_content">
+    </div>
+    <input type="hidden" name="forum_id" value="{{forumInfo.ID}}">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<script>
+    $(function () {
+
+        $('#newThreadForm').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: '/thread/add-new',
+                data: $('#newThreadForm').serialize(),
+                success: function (data) {
+                    if (data['type'] == 'success') {
+                        swal({
+                            type: data['type'],
+                            title: data['title'],
+                            text: data['text'],
+                            timer: 5000,
+                            onOpen: () => {
+                                swal.showLoading()
+                            }
+                        })
+                    } else {
+                        swal({
+                            type: data['type'],
+                            title: data['title'],
+                            text: data['text'],
+                            footer: '<a href="/register">Need to register?</a>',
+                        })
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

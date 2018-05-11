@@ -28,7 +28,10 @@ class User extends \Core\Controller
     public function logInAction()
     {
         if (isset($_POST['username']) && isset($_POST['password'])) {
-            if (UserModel::login($_POST['username'], $_POST['password'])) {
+            $userInfo = UserModel::login($_POST['username'], $_POST['password']);
+            if ($userInfo) {
+                Session::put('user', $userInfo[0]['user_key']);
+                Session::put('username', $userInfo[0]['username']);
                 $data = [ 'type' => 'success', 'title' => 'yay!', 'text' => 'Login successful, redirecting!' ];
             } else {
                 $data = [ 'type' => 'error', 'title' => 'oh no!', 'text' => 'Your login information was incorrect!' ];
