@@ -3,20 +3,12 @@
 namespace App\Controllers;
 
 use \Core\View;
-use \Core\Session;
+use \Core\Modules\Session;
+use \Core\Modules\Debugger as Debug;
 use App\Models\Category as CategoryModel;
 
-class Category extends \Core\Controller
+class Category extends \Core\Base\Controller
 {
-    public function indexAction()
-    {
-        $posts = Post::getAll();
-
-        View::renderTemplate('Posts/index.html', [
-            'posts' => $posts
-        ]);
-    }
-
     public function viewAction() {
         $categoryData = CategoryModel::getCategory($this->route_params['id']);
         if ($categoryData) {
@@ -28,17 +20,5 @@ class Category extends \Core\Controller
         } else {
             echo '??';
         }
-    }
-
-    public function logOutAction()
-    {
-        if (Session::get('user')) {
-            $data = [ 'type' => 'success', 'title' => 'Bye!', 'text' => 'Logged out!' ];
-            Session::destroy();
-        } else {
-            $data = [ 'type' => 'error', 'title' => 'oh no!', 'text' => 'Logout Failed!' ];
-        }
-        header('Content-type: application/json');
-        echo json_encode( $data );     
     }
 }

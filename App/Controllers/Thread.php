@@ -2,10 +2,11 @@
 namespace App\Controllers;
 
 use \Core\View;
-use \Core\Session;
+use \Core\Modules\Session;
+use \Core\Modules\Debugger as Debug;
 use App\Models\Thread as ThreadModel;
 
-class Thread extends \Core\Controller
+class Thread extends \Core\Base\Controller
 {
     public function indexAction()
     {
@@ -20,7 +21,7 @@ class Thread extends \Core\Controller
     {
         if (isset($_POST['forum_id']) && isset($_POST['thread_title']) && isset($_POST['thread_content'])) {
             if (ThreadModel::create($_POST['forum_id'], Session::get('user'), $_POST['thread_title'], $_POST['thread_content'])) {
-                $data = [ 'type' => 'success', 'title' => 'Bye!', 'text' => 'Logged out!' ];
+                $data = [ 'type' => 'success', 'title' => 'Yay!', 'text' => 'Thread created!' ];
             } else {
                 $data = [ 'type' => 'error', 'title' => 'on no!', 'text' => 'Failed to post thread!' ];
             }
@@ -40,12 +41,5 @@ class Thread extends \Core\Controller
         } else {
             echo '??';
         }
-    }
-    
-    public function editAction()
-    {
-        echo 'Hello from the edit action in the Posts controller!';
-        echo '<p>Route parameters: <pre>' .
-             htmlspecialchars(print_r($this->route_params, true)) . '</pre></p>';
     }
 }

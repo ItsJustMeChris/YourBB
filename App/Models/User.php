@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Models;
-use \Core\Session;
-
+use \Core\Modules\Session;
+use \Core\Modules\Debugger as Debug;
 use PDO;
 
-class User extends \Core\Model
+class User extends \Core\Base\Model
 {
     public static function login($username, $password) 
     {
@@ -60,21 +60,6 @@ class User extends \Core\Model
                 'banned' => 0
             );
             static::insert('users', $test);    
-        }
-    }
-
-    public static function getAll()
-    {    
-        try {
-            $db = static::getDB();
-
-            $stmt = $db->query('SELECT id, title, content FROM posts ORDER BY created_at');
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            return $results;
-            
-        } catch (PDOException $e) {
-            echo $e->getMessage();
         }
     }
 }

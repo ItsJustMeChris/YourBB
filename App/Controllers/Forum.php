@@ -3,20 +3,12 @@
 namespace App\Controllers;
 
 use \Core\View;
-use \Core\Session;
+use \Core\Modules\Session;
+use \Core\Modules\Debugger as Debug;
 use App\Models\Forum as ForumModel;
 
-class Forum extends \Core\Controller
+class Forum extends \Core\Base\Controller
 {
-    public function indexAction()
-    {
-        $posts = Post::getAll();
-
-        View::renderTemplate('Posts/index.html', [
-            'posts' => $posts
-        ]);
-    }
-
     public function viewAction() {
         $forumData = ForumModel::getForumByID($this->route_params['id']);
         if ($forumData) {

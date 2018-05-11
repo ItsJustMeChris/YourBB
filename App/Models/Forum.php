@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Models;
-use \Core\Session;
-
+use \Core\Modules\Session;
+use \Core\Modules\Debugger as Debug;
 use PDO;
 
-class Forum extends \Core\Model
+class Forum extends \Core\Base\Model
 {
     public static function create($categoryID, $title, $content) 
     {
@@ -25,7 +25,6 @@ class Forum extends \Core\Model
 
     public static function getForumByName($categoryName) 
     {
-        //        $arr = static::select('user', 'username=? AND password=?', ['Joe', '$2y$10$d2BxUUNCV38YHhEowAef0em6fqTtA6iymhR4dLVyTmcW0P6hjhIB6']);
         $arr = static::select('category_forums', 'name=?', [$categoryName]);
         if ($arr) {
             return $arr;
@@ -35,7 +34,6 @@ class Forum extends \Core\Model
 
     public static function getForumByID($id) 
     {
-        //        $arr = static::select('user', 'username=? AND password=?', ['Joe', '$2y$10$d2BxUUNCV38YHhEowAef0em6fqTtA6iymhR4dLVyTmcW0P6hjhIB6']);
         $arr = static::select('category_forums', 'ID=?', [$id]);
         if ($arr) {
             return $arr;

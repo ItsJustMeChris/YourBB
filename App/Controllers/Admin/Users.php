@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Controllers\Admin;
+use \Core\Modules\Session;
+use \Core\Modules\Debugger as Debug;
 
-class Users extends \Core\Controller
+class Users extends \Core\Base\Controller
 {
     protected function before()
     {

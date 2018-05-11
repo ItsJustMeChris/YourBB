@@ -4,15 +4,16 @@ namespace App\Models;
 
 use PDO;
 use App\Models\User as UserModel;
+use \Core\Modules\Session;
+use \Core\Modules\Debugger as Debug;
 
-class Thread extends \Core\Model
+class Thread extends \Core\Base\Model
 {
     public static function create($forumID, $userKey, $threadTitle, $threadContents) 
     {
         if ($forumID == '' || $userKey == '' || $threadTitle == '' || $threadContents == '' || !UserModel::getUserFromKey($userKey)) {
             return false;
         }
-        //get userid from post key
         $user = UserModel::getUserFromKey($userKey);
         $threadCreateDate = date("Y-m-d H:i:s");
         $test = array(
@@ -30,7 +31,6 @@ class Thread extends \Core\Model
 
     public static function getThreadByID($id) 
     {
-        //        $arr = static::select('user', 'username=? AND password=?', ['Joe', '$2y$10$d2BxUUNCV38YHhEowAef0em6fqTtA6iymhR4dLVyTmcW0P6hjhIB6']);
         $arr = static::select('forum_threads', 'ID=?', [$id]);
         if ($arr) {
             return $arr;
@@ -40,7 +40,6 @@ class Thread extends \Core\Model
 
     public static function getThreadPosts($id) 
     {
-        //        $arr = static::select('user', 'username=? AND password=?', ['Joe', '$2y$10$d2BxUUNCV38YHhEowAef0em6fqTtA6iymhR4dLVyTmcW0P6hjhIB6']);
         $arr = static::select('thread_comments', 'comment_id=?', [$id]);
         if ($arr) {
             return $arr;

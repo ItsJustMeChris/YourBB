@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Models;
-use \Core\Session;
+use \Core\Modules\Session;
+use \Core\Modules\Debugger as Debug;
 
 use PDO;
 
-class Category extends \Core\Model
+class Category extends \Core\Base\Model
 {
     public static function create($stuff) 
     {
@@ -25,7 +26,6 @@ class Category extends \Core\Model
 
     public static function getCategory($categoryName) 
     {
-        //        $arr = static::select('user', 'username=? AND password=?', ['Joe', '$2y$10$d2BxUUNCV38YHhEowAef0em6fqTtA6iymhR4dLVyTmcW0P6hjhIB6']);
         $arr = static::select('forum_categories', 'name=?', [$categoryName]);
         if ($arr) {
             return $arr;

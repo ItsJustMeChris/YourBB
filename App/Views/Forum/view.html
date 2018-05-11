@@ -27,6 +27,8 @@
     {% endfor %}
 </div>
 
+{% if session != "" %}
+
 <h1>New Thread</h1>
 
 <form action="" method="POST" id="newThreadForm">
@@ -53,27 +55,21 @@
                 url: '/thread/add-new',
                 data: $('#newThreadForm').serialize(),
                 success: function (data) {
-                    if (data['type'] == 'success') {
-                        swal({
-                            type: data['type'],
-                            title: data['title'],
-                            text: data['text'],
-                            timer: 5000,
-                            onOpen: () => {
-                                swal.showLoading()
-                            }
-                        })
-                    } else {
-                        swal({
-                            type: data['type'],
-                            title: data['title'],
-                            text: data['text'],
-                            footer: '<a href="/register">Need to register?</a>',
-                        })
-                    }
+                    const toast = swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+
+                    toast({
+                        type: data['type'],
+                        title: data['title'] + " - " + data['text']
+                    })
                 }
             });
         });
     });
 </script>
+{% endif %}
 {% endblock %}

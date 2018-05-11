@@ -1,7 +1,7 @@
 <?php
 
 namespace Core;
-use \Core\Session;
+use \Core\Modules\Session;
 
 class View
 {
