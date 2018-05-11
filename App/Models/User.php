@@ -28,9 +28,9 @@ class User extends \Core\Base\Model
         return false;
     }
 
-    public static function getUser($username) 
+    public static function getUserFromID($username) 
     {
-        $arr = static::select('users', 'username=?', [strtoupper($username)]);
+        $arr = static::select('users', 'id=?', [$username]);
         if ($arr) {
             return $arr;
         }

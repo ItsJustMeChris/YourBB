@@ -16,8 +16,9 @@ class Post extends \Core\Base\Model
         $user = UserModel::getUserFromKey($userKey);
         $postCreateDate = date("Y-m-d H:i:s");
         $test = array(
-            'comment_id' => $threadID, 
+            'thread_id' => $threadID, 
             'poster_id' => $user[0]['ID'],
+            'poster_name' => $user[0]['username'],
             'post_time' => $postCreateDate, 
             'last_edit_time' => $postCreateDate,
             'content' => $content

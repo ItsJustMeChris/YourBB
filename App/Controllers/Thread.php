@@ -5,6 +5,7 @@ use \Core\View;
 use \Core\Modules\Session;
 use \Core\Modules\Debugger as Debug;
 use App\Models\Thread as ThreadModel;
+use App\Models\User as UserModel;
 
 class Thread extends \Core\Base\Controller
 {

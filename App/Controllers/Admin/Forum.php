@@ -15,7 +15,22 @@ class Forum extends \Core\Base\Controller
         // Make sure an admin user is logged in for example
         // return false;
     }
-
+    public function createNewCategoryAction()
+    {
+        if (isset($_POST['name']) && isset($_POST['description'])) {
+            if (CategoryModel::create($_POST['name'], $_POST['description'])) {
+                $data = [ 'type' => 'success', 'title' => 'yay!', 'text' => 'Created Category!' ];
+            } else {
+                $data = [ 'type' => 'error', 'title' => 'oh no!', 'text' => 'Failed Creation' ];
+            }
+            header('Content-type: application/json');
+            echo json_encode( $data );        
+        } else {
+            View::renderTemplate('Admin/category.html', [
+                'session' => Session::get('user')
+            ]);
+        }
+    }
     public function createNewForumAction()
     {
         if (isset($_POST['title']) && isset($_POST['content']) && isset($_POST['category_id'])) {

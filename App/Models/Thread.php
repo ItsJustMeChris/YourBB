@@ -17,12 +17,13 @@ class Thread extends \Core\Base\Model
         $user = UserModel::getUserFromKey($userKey);
         $threadCreateDate = date("Y-m-d H:i:s");
         $test = array(
-            'thread_id' => $forumID, 
+            'forum_id' => $forumID, 
             'title' => $threadTitle, 
             'locked' => 0,
             'post_time' => $threadCreateDate,
             'last_edit_time' => $threadCreateDate,
             'creator_id' => $user[0]['ID'],
+            'creator_name' => $user[0]['username'],
             'content' => $threadContents
         );
         static::insert('forum_threads', $test);
@@ -40,7 +41,7 @@ class Thread extends \Core\Base\Model
 
     public static function getThreadPosts($id) 
     {
-        $arr = static::select('thread_comments', 'comment_id=?', [$id]);
+        $arr = static::select('thread_comments', 'thread_id=?', [$id]);
         if ($arr) {
             return $arr;
         }

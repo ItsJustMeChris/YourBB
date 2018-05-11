@@ -74,7 +74,7 @@
                 e.preventDefault();
                 $.ajax({
                     type: 'post',
-                    url: 'user/log-out',
+                    url: '/user/log-out',
                     data: $('#logoutForm').serialize(),
                     success: function (data) {
                         const toast = swal.mixin({

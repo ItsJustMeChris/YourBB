@@ -7,8 +7,6 @@ $test = function() {
     echo 'This was called from an event called test';
 };
 
-\Core\Modules\Events\EventListener::register('test', $test);
-
 \Core\Modules\Session::init();
 
 error_reporting(E_ALL);

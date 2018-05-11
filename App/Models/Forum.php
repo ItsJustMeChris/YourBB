@@ -11,7 +11,7 @@ class Forum extends \Core\Base\Model
     {
         if ($categoryID != '' && $title != '') {
             $test = array(
-                'forum_id' => $categoryID, 
+                'category_id' => $categoryID, 
                 'title' => $title, 
                 'locked' => 0, 
                 'content' => $content
@@ -42,7 +42,7 @@ class Forum extends \Core\Base\Model
     }
 
     public static function getForumsForCategory($categoryID) {
-        $arr = static::select('category_forums', 'forum_id=?', [$categoryID]);
+        $arr = static::select('category_forums', 'category_id=?', [$categoryID]);
         if ($arr) {
             return $arr;
         }
@@ -50,7 +50,7 @@ class Forum extends \Core\Base\Model
     }
 
     public static function getForumThreads($categoryID) {
-        $arr = static::select('forum_threads', 'thread_id=?', [$categoryID]);
+        $arr = static::select('forum_threads', 'forum_id=?', [$categoryID]);
         if ($arr) {
             return $arr;
         }
