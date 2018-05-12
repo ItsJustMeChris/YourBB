@@ -16,7 +16,7 @@ class Forum extends \Core\Base\Controller
         // return false;
     }
 
-    public function createNewCategoryAction()
+    public function createNewAction()
     {
         if (isset($_POST['name']) && isset($_POST['description'])) {
             if (CategoryModel::create($_POST['name'], $_POST['description'])) {
