@@ -18,7 +18,6 @@ class Post extends \Core\Base\Model
         $test = array(
             'thread_id' => $threadID, 
             'poster_id' => $user[0]['ID'],
-            'poster_name' => $user[0]['username'],
             'post_time' => $postCreateDate, 
             'last_edit_time' => $postCreateDate,
             'content' => $content

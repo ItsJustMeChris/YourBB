@@ -23,7 +23,6 @@ class Thread extends \Core\Base\Model
             'post_time' => $threadCreateDate,
             'last_edit_time' => $threadCreateDate,
             'creator_id' => $user[0]['ID'],
-            'creator_name' => $user[0]['username'],
             'content' => $threadContents
         );
         static::insert('forum_threads', $test);

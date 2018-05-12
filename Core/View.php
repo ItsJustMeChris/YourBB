@@ -28,6 +28,8 @@ class View
             $loader = new \Twig_Loader_Filesystem('../App/Views');
             $twig = new \Twig_Environment($loader);
         }
+        $args['rendertime'] = round(\Core\Modules\Benchmark\Timer::end(), 3);
+
         echo $twig->render($template, $args);
     }
 }

@@ -1,6 +1,8 @@
 <?php
 require '../vendor/autoload.php';
 
+\Core\Modules\Benchmark\Timer::start();
+
 Twig_Autoloader::register();
 
 $test = function() {

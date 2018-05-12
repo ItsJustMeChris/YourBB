@@ -66,6 +66,7 @@
         
         <br>
         <div id="renderTime"></div>
+        <div id="phpcreationtime">PHP Render Time {{rendertime}}s</div>
     </div>
 
     <script>
@@ -100,7 +101,7 @@
         <script type="text/javascript">
             var start_time=+new Date();
             window.onload=function(){
-                document.getElementById('renderTime').innerHTML = "Rendered In: " + ((+new Date()-start_time)/1000) + "s"
+                document.getElementById('renderTime').innerHTML = "HTML Render Time: " + ((+new Date()-start_time)/1000) + "s"
             };
         </script>
 </body>

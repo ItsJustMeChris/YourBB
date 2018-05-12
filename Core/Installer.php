@@ -68,7 +68,6 @@ class Installer {
              forum_id int not null,
              FOREIGN KEY forum_id(forum_id) REFERENCES category_forums(ID),
              creator_id INT( 11 ) NOT NULL,
-             creator_name VARCHAR( 50 ) NOT NULL,
              post_time DATETIME NOT NULL,
              last_edit_time DATETIME NOT NULL,
              title VARCHAR( 50 ) NOT NULL, 
@@ -88,7 +87,6 @@ class Installer {
              thread_id int not null,
              FOREIGN KEY thread_id(thread_id) REFERENCES forum_threads(ID),
              poster_id INT( 11 ) NOT NULL,
-             poster_name VARCHAR( 50 ) NOT NULL,
              post_time DATETIME NOT NULL,
              last_edit_time DATETIME NOT NULL,
              content TEXT( 500 ) NOT NULL);" ;
