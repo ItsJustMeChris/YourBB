@@ -1,27 +1,43 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block body %}
 
-<nav aria-label="breadcrumb" style="margin-top: 1rem;">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active">
-            <a href="/">Board Index</a>
+
+<nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+        <li>
+            <a href="#">YourBB</a>
         </li>
-    </ol>
+        <li>
+            <a href="#">Category</a>
+        </li>
+        <li>
+            <a href="#">Forum</a>
+        </li>
+        <li class="is-active">
+            <a href="#" aria-current="page">thread</a>
+        </li>
+    </ul>
 </nav>
 
 {% for row in categories %}
-<div class="card categoryCard">
-    <div class="card-body">
-        <h5 class="card-title">{{row.name}}</h5>
-        <p class="card-text">{{row.description}}</p>
-    </div>
+<div class="card">
+
+    <header class="card-header">
+
+        <p class="card-header-title">
+            {{row.name}}
+        </p>
+
+    </header>
+
     {% for forum in forums[row.ID] %}
-    <div class="card forumCard">
-        <div class="card-body">
-            <h5 class="card-title">
-                <a href="/forum/{{forum.ID}}/view">{{forum.title}}</a>
-            </h5>
+
+    <div class="card-content block-{% if loop.index0 % 2 == 0 %}1{% else %}0{% endif %}">
+        <div class="content">
+            <a href="/forum/{{forum.ID}}/view">{{forum.title}}</a>
         </div>
     </div>
     {% endfor %}
+
 </div>
+
 {% endfor %} {% endblock %}

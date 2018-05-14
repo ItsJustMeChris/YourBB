@@ -36,9 +36,11 @@ class Thread extends \Core\Base\Controller
         if ($threadData) {
             $threadPosts = ThreadModel::getThreadPosts($threadData[0]['ID']);
             $temp = [];
-            foreach($threadPosts as $post) {
-                $post['username'] = UserModel::getUserFromID($post['poster_id'])[0]['username'];
-                array_push($temp, $post);
+            if ($threadPosts) {
+                foreach($threadPosts as $post) {
+                    $post['username'] = UserModel::getUserFromID($post['poster_id'])[0]['username'];
+                    array_push($temp, $post);
+                }
             }
             $threadPosts = $temp;
             View::renderTemplate('Thread/view.html', [

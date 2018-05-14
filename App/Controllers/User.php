@@ -11,9 +11,21 @@ class User extends \Core\Base\Controller
 {
     public function registerAction()
     {
-        UserModel::create($_POST);
-        View::renderTemplate('User/register.html', [
-        ]);
+        if (isset($_POST['username']) && isset($_POST['password'])) {
+            $userInfo = UserModel::create($_POST['username'], $_POST['password']);
+            if ($userInfo) {
+                Session::put('user', $userInfo['user_key']);
+                Session::put('username', $userInfo['username']);
+                $data = [ 'type' => 'success', 'title' => 'yay!', 'text' => 'Registration Successful!' ];
+            } else {
+                $data = [ 'type' => 'error', 'title' => 'oh no!', 'text' => 'Failed to register' ];
+            }
+            header('Content-type: application/json');
+            echo json_encode( $data );        
+        } else {
+            View::renderTemplate('User/register.html', [
+            ]);
+        }
     }
 
     public function logInAction()

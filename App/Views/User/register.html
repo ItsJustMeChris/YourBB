@@ -1,17 +1,73 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %}User | Register{% endblock %} {% block body %}
 
-{% block title %}User | Register{% endblock %}
+<div class="card">
+    <header class="card-header">
+        <p class="card-header-title">
+            Register
+        </p>
+    </header>
+    <div class="card-content">
+        <div class="content">
+            <form action="" method="POST" id="registerForm">
+                <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                        <input class="input" name="username" type="username" placeholder="Username">
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input" name="password" type="password" placeholder="Password">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button type="submit" class="button is-success">
+                            Login
+                        </button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-{% block body %}
+<script>
+    $(function () {
 
-    <h1>New Post</h1>
-
-    <form action="" method="POST">
-        Username:<br>
-        <input type="text" name="username"><br>
-        Password:<br>
-        <input type="text" name="password"><br><br>
-        <input type="submit" value="Submit">
-      </form>
+        $('#registerForm').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: '',
+                data: $('#registerForm').serialize(),
+                success: function (data) {
+                    if (data['type'] == 'success') {
+                        swal({
+                            type: data['type'],
+                            title: data['title'],
+                            text: data['text'],
+                            timer: 5000,
+                            onOpen: () => {
+                                swal.showLoading()
+                            }
+                        }).then((result) => {
+                            window.location.replace("/");
+                        })
+                    } else {
+                        swal({
+                            type: data['type'],
+                            title: data['title'],
+                            text: data['text'],
+                            footer: '<a href="/user/register">Need to register?</a>',
+                        })
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 {% endblock %}

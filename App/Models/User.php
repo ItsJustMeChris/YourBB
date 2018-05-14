@@ -37,29 +37,33 @@ class User extends \Core\Base\Model
         return false;
     }
 
-    public static function create($stuff) 
+    public static function create($username, $password) 
     {
-        if (isset($_POST['username']) && isset($_POST['password'])) {
-            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-                $ip = $_SERVER['HTTP_CLIENT_IP'];
-            } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-            } else {
-                $ip = $_SERVER['REMOTE_ADDR'];
-            }
-            
-            $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $test = array(
-                'username' => $_POST['username'], 
-                'password' => $passwordHashed,
-                'reg_ip' => $ip,
-                'cur_ip' => $ip,
-                'user_key' => bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM)),
-                'profile_image' => '',
-                'user_group' => 1,
-                'banned' => 0
-            );
-            static::insert('users', $test);    
+        $arr = static::select('users', 'UPPER(username)=?', [strtoupper($username)]);
+        if ($arr) {
+            return false;
         }
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+
+        $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+        $userInfo = array(
+            'username' => $_POST['username'], 
+            'password' => $passwordHashed,
+            'reg_ip' => $ip,
+            'cur_ip' => $ip,
+            'user_key' => bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM)),
+            'profile_image' => '',
+            'user_group' => 1,
+            'banned' => 0
+        );
+        static::insert('users', $userInfo);
+        return $userInfo;
     }
 }
